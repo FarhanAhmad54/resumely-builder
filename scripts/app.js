@@ -13,11 +13,6 @@ const App = (function () {
         Features.init();
         Export.init();
 
-        // Initialize interstitial ad system (shows ad on app open)
-        if (typeof InterstitialAd !== 'undefined') {
-            InterstitialAd.init();
-        }
-
         // Setup UI event listeners
         setupNavigation();
         setupHeaderButtons();

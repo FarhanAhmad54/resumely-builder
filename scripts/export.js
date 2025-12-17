@@ -30,28 +30,14 @@ const Export = (function () {
         if (downloadPdfBtn) {
             downloadPdfBtn.addEventListener('click', () => {
                 document.querySelector('.export-dropdown')?.classList.remove('active');
-                // Show interstitial ad, then export PDF after user closes it
-                if (typeof InterstitialAd !== 'undefined') {
-                    InterstitialAd.showAdThen(() => {
-                        doExportToPDF();
-                    });
-                } else {
-                    doExportToPDF();
-                }
+                doExportToPDF();
             });
         }
 
         if (printBtn) {
             printBtn.addEventListener('click', () => {
                 document.querySelector('.export-dropdown')?.classList.remove('active');
-                // Show interstitial ad, then print after user closes it
-                if (typeof InterstitialAd !== 'undefined') {
-                    InterstitialAd.showAdThen(() => {
-                        doPrintResume();
-                    });
-                } else {
-                    doPrintResume();
-                }
+                doPrintResume();
             });
         }
     }

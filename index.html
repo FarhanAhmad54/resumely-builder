@@ -48,15 +48,9 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/ads.css">
 
     <!-- PDF Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-    <!-- Google AdSense -->
-    <!-- Replace 'ca-pub-1605089091983411' with your actual AdSense Publisher ID after approval -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1605089091983411"
-        crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -546,53 +540,8 @@
     <script src="scripts/features.js"></script>
     <script src="scripts/export.js"></script>
     <script src="scripts/history.js"></script>
-    <script src="scripts/interstitial-ad.js"></script>
     <script src="scripts/app.js"></script>
 
-    <!-- Fullscreen Interstitial Ad Overlay -->
-    <div class="interstitial-overlay" id="interstitialAd">
-        <div class="interstitial-container">
-            <button class="interstitial-close-btn" id="interstitialCloseBtn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-            <div class="interstitial-timer" id="interstitialTimer">10</div>
-            <div class="interstitial-content">
-                <!-- Google AdSense In-Article/Display Ad -->
-                <!-- Replace data-ad-slot with your actual ad slot ID after AdSense approval -->
-                <div class="adsense-container" id="adsenseAdContainer">
-                    <ins class="adsbygoogle"
-                        style="display:block; width:100%; max-width:336px; height:280px; margin:0 auto;"
-                        data-ad-client="ca-pub-1605089091983411" data-ad-slot="XXXXXXXXXX" data-ad-format="rectangle"
-                        data-full-width-responsive="false"></ins>
-                </div>
-                <!-- Fallback content when AdSense not loaded -->
-                <div class="interstitial-ad-visual" id="adFallback">
-                    <div class="ad-icon-wrapper">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                            <line x1="16" y1="13" x2="8" y2="13"></line>
-                            <line x1="16" y1="17" x2="8" y2="17"></line>
-                            <polyline points="10 9 9 9 8 9"></polyline>
-                        </svg>
-                    </div>
-                    <h2 class="ad-title">Resumely Premium</h2>
-                    <p class="ad-subtitle">Create stunning professional resumes in minutes</p>
-                    <div class="ad-features">
-                        <span class="ad-feature">✓ 10+ Templates</span>
-                        <span class="ad-feature">✓ PDF Export</span>
-                        <span class="ad-feature">✓ ATS Optimized</span>
-                    </div>
-                    <div class="ad-cta">
-                        <span class="ad-badge">SPONSORED</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>
