@@ -47,14 +47,26 @@ const corsOrigins = process.env.CORS_ORIGINS
     ? process.env.CORS_ORIGINS.split(',').map(o => o.trim())
     : ['http://localhost:3000', 'http://127.0.0.1:3000'];
 
+// Add common Netlify patterns if in production
+if (process.env.NODE_ENV === 'production') {
+    corsOrigins.push('https://resumely-builder.netlify.app');
+    corsOrigins.push('https://resumelybuilder.netlify.app');
+}
+
 app.use(cors({
     origin: function (origin, callback) {
         // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
 
+        // Check if origin matches any allowed origin
         if (corsOrigins.indexOf(origin) !== -1) {
             callback(null, true);
-        } else {
+        }
+        // Also allow any .netlify.app domain for flexibility
+        else if (origin && origin.endsWith('.netlify.app')) {
+            callback(null, true);
+        }
+        else {
             console.warn(`CORS blocked origin: ${origin}`);
             callback(null, false);
         }

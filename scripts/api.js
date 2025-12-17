@@ -4,7 +4,15 @@
  */
 
 const API = (function () {
-    const BASE_URL = '/api';
+    // Determine API base URL based on environment
+    // In production (Netlify), use the Render backend URL
+    // In development (localhost), use relative path
+    const isProduction = window.location.hostname !== 'localhost' &&
+        window.location.hostname !== '127.0.0.1';
+    const BASE_URL = isProduction
+        ? 'https://resumely.onrender.com/api'  // Your Render backend URL
+        : '/api';
+
     let authToken = null;
     let currentUser = null;
 
