@@ -150,39 +150,39 @@ h4 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--space-2) var(--space-4);
+    padding: var(--space-2) var(--space-3);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
     box-shadow: var(--shadow-sm);
-    flex-wrap: wrap;
-    gap: var(--space-2);
+    flex-wrap: nowrap;
+    gap: var(--space-1);
 }
 
 .header-left {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
+    gap: var(--space-2);
     flex-shrink: 0;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--space-1);
 }
 
 .logo-icon {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     color: var(--primary-500);
     flex-shrink: 0;
 }
 
 .logo-text {
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
     font-weight: 700;
     background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-400) 100%);
     -webkit-background-clip: text;
@@ -205,15 +205,21 @@ h4 {
 .header-right {
     display: flex;
     align-items: center;
-    gap: var(--space-1);
-    flex-wrap: wrap;
+    gap: 2px;
+    flex-shrink: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
+.header-right::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide dividers on mobile */
 .header-divider {
-    width: 1px;
-    height: 20px;
-    background: var(--gray-200);
-    margin: 0 var(--space-1);
+    display: none;
 }
 
 /* Export Dropdown */
@@ -282,21 +288,43 @@ h4 {
     flex-shrink: 0;
 }
 
-/* Header button text hidden on small screens */
+/* Mobile header - compact buttons, no text */
 .header-right .btn span {
     display: none;
 }
 
 .header-right .btn {
-    padding: var(--space-2);
+    padding: var(--space-1);
+    min-width: 32px;
+    min-height: 32px;
 }
 
-/* Desktop header styles */
+.header-right .btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Export button smaller on mobile but keep some text */
+.header-right .btn-primary {
+    padding: var(--space-1) var(--space-2);
+}
+
+.header-right .btn-primary span {
+    display: inline;
+    font-size: var(--text-xs);
+}
+
+.header-right .btn-primary .dropdown-arrow {
+    width: 12px;
+    height: 12px;
+}
+
+/* Tablet - 768px+ */
 @media (min-width: 768px) {
     .header {
         padding: 0 var(--space-4);
         height: var(--header-height);
-        flex-wrap: nowrap;
+        gap: var(--space-2);
     }
 
     .header-right .btn span {
@@ -305,10 +333,26 @@ h4 {
 
     .header-right .btn {
         padding: var(--space-2) var(--space-3);
+        min-width: auto;
+        min-height: auto;
+    }
+
+    .header-right .btn svg {
+        width: 18px;
+        height: 18px;
     }
 
     .header-right {
         gap: var(--space-2);
+        overflow: visible;
+    }
+
+    .header-divider {
+        display: block;
+        width: 1px;
+        height: 20px;
+        background: var(--gray-200);
+        margin: 0 var(--space-1);
     }
 
     .logo-icon {
@@ -319,8 +363,17 @@ h4 {
     .logo-text {
         font-size: var(--text-xl);
     }
+
+    .logo {
+        gap: var(--space-2);
+    }
+
+    .header-left {
+        gap: var(--space-3);
+    }
 }
 
+/* Desktop - 1024px+ */
 @media (min-width: 1024px) {
     .header {
         padding: 0 var(--space-6);
@@ -331,7 +384,7 @@ h4 {
     }
 }
 
-/* Only show tagline on very wide screens to prevent overlap */
+/* Wide screens - show tagline */
 @media (min-width: 1400px) {
     .header-center {
         display: block;
@@ -1756,12 +1809,19 @@ h4 {
 /* Mobile layout - stack vertically */
 @media (max-width: 767px) {
     :root {
-        --header-height: 56px;
+        --header-height: 50px;
+        --sidebar-width: 50px;
+    }
+
+    body {
+        overflow-x: hidden;
     }
 
     .main-container {
-        grid-template-columns: 60px 1fr;
-        grid-template-rows: auto;
+        grid-template-columns: var(--sidebar-width) 1fr;
+        grid-template-rows: 1fr;
+        margin-top: var(--header-height);
+        height: calc(100vh - var(--header-height));
     }
 
     .preview-panel {
@@ -1769,12 +1829,18 @@ h4 {
     }
 
     .main-container.preview-hidden {
-        grid-template-columns: 60px 1fr;
+        grid-template-columns: var(--sidebar-width) 1fr;
     }
 
     /* Collapse sidebar to icons only */
     .sidebar {
-        width: 60px;
+        width: var(--sidebar-width);
+        min-width: var(--sidebar-width);
+    }
+
+    .sidebar-nav {
+        padding: var(--space-2);
+        gap: 2px;
     }
 
     .nav-item span {
@@ -1782,12 +1848,19 @@ h4 {
     }
 
     .nav-item {
-        padding: var(--space-3);
+        padding: var(--space-2);
         justify-content: center;
+        border-radius: var(--radius-sm);
+    }
+
+    .nav-item svg {
+        width: 18px;
+        height: 18px;
     }
 
     .sidebar-footer {
         padding: var(--space-2);
+        gap: var(--space-1);
     }
 
     .sidebar-footer .btn span {
@@ -1797,19 +1870,33 @@ h4 {
     .sidebar-footer .btn {
         padding: var(--space-2);
         justify-content: center;
+        width: 100%;
+    }
+
+    .sidebar-footer .btn svg {
+        width: 16px;
+        height: 16px;
     }
 
     .ats-score {
         display: none;
     }
 
-    /* Editor takes more space */
+    /* Editor takes remaining space */
     .editor-panel {
         border-right: none;
     }
 
+    .editor-header {
+        padding: var(--space-3) var(--space-4);
+    }
+
+    .editor-title {
+        font-size: var(--text-base);
+    }
+
     .editor-content {
-        padding: var(--space-4);
+        padding: var(--space-3);
     }
 
     .form-row {
@@ -1820,19 +1907,52 @@ h4 {
     .modal-content {
         width: 95%;
         max-height: 90vh;
+        margin: var(--space-2);
     }
 
     .modal-lg {
         max-width: 100%;
     }
 
+    .modal-header {
+        padding: var(--space-3) var(--space-4);
+    }
+
+    .modal-body {
+        padding: var(--space-4);
+    }
+
     .template-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-3);
+        gap: var(--space-2);
     }
 
     .template-preview {
-        height: 120px;
+        height: 100px;
+    }
+
+    .template-name {
+        padding: var(--space-2);
+        font-size: var(--text-xs);
+    }
+
+    /* Toast and autosave on mobile */
+    .toast {
+        left: var(--space-3);
+        right: var(--space-3);
+        transform: translateY(100px);
+        width: auto;
+    }
+
+    .toast.show {
+        transform: translateY(0);
+    }
+
+    .autosave-indicator {
+        bottom: var(--space-3);
+        right: var(--space-3);
+        padding: var(--space-1) var(--space-2);
+        font-size: 10px;
     }
 }
 
