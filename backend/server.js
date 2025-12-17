@@ -11,9 +11,7 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 
-// Import routes
-const authRoutes = require('./routes/auth');
-const resumeRoutes = require('./routes/resume');
+// Routes removed - authentication disabled
 
 // Import middleware
 const { apiLimiter } = require('./middleware/rateLimiter');
@@ -133,8 +131,7 @@ app.use(express.static(path.join(__dirname, '..')));
 // API ROUTES
 // ===========================================
 
-app.use('/api/auth', authRoutes);
-app.use('/api/resumes', resumeRoutes);
+// Auth and resume routes disabled
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -152,24 +149,8 @@ app.get('/api', (req, res) => {
         success: true,
         name: 'Resumely API',
         version: '1.0.0',
+        message: 'Backend running with security features. Authentication disabled.',
         endpoints: {
-            auth: {
-                register: 'POST /api/auth/register',
-                login: 'POST /api/auth/login',
-                logout: 'POST /api/auth/logout',
-                me: 'GET /api/auth/me',
-                check: 'GET /api/auth/check',
-                changePassword: 'PUT /api/auth/password'
-            },
-            resumes: {
-                list: 'GET /api/resumes',
-                get: 'GET /api/resumes/:id',
-                create: 'POST /api/resumes',
-                update: 'PUT /api/resumes/:id',
-                delete: 'DELETE /api/resumes/:id',
-                setDefault: 'POST /api/resumes/:id/default',
-                duplicate: 'POST /api/resumes/:id/duplicate'
-            },
             health: 'GET /api/health'
         }
     });
