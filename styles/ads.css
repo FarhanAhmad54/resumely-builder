@@ -1,0 +1,252 @@
+/**
+ * Resumely - Interstitial Ad Styles
+ * Fullscreen ad overlay with 10-second timer
+ */
+
+/* ========================================
+   FULLSCREEN INTERSTITIAL AD
+======================================== */
+
+.interstitial-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.interstitial-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.interstitial-container {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+    border-radius: 24px;
+    padding: 48px 40px;
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Close Button - Hidden initially */
+.interstitial-close-btn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.interstitial-close-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.interstitial-close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.interstitial-close-btn svg {
+    width: 20px;
+    height: 20px;
+    color: #fff;
+}
+
+/* Timer Display */
+.interstitial-timer {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    min-width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.interstitial-timer.complete {
+    background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+/* Ad Content */
+.interstitial-content {
+    text-align: center;
+}
+
+/* AdSense Container */
+.adsense-container {
+    min-height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.adsense-container ins.adsbygoogle {
+    background: transparent;
+}
+
+/* Hide fallback when AdSense loads */
+.adsense-container:not(:empty)+#adFallback {
+    display: none;
+}
+
+.interstitial-ad-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.ad-icon-wrapper {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+    box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3);
+}
+
+.ad-icon-wrapper svg {
+    width: 50px;
+    height: 50px;
+    color: #fff;
+}
+
+.ad-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    background: linear-gradient(135deg, #fff 0%, #c4c4c4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.ad-subtitle {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 8px 0 0 0;
+    line-height: 1.5;
+}
+
+.ad-features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.ad-feature {
+    padding: 8px 16px;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 20px;
+    color: #10B981;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.ad-cta {
+    margin-top: 24px;
+}
+
+.ad-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .interstitial-container {
+        padding: 40px 24px;
+        border-radius: 20px;
+    }
+
+    .ad-title {
+        font-size: 24px;
+    }
+
+    .ad-subtitle {
+        font-size: 14px;
+    }
+
+    .ad-icon-wrapper {
+        width: 80px;
+        height: 80px;
+    }
+
+    .ad-icon-wrapper svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .ad-features {
+        gap: 8px;
+    }
+
+    .ad-feature {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}

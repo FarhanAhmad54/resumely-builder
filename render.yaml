@@ -1,0 +1,21 @@
+# Render.com Deployment Configuration
+# This file tells Render how to build and deploy your app
+
+services:
+  - type: web
+    name: resumely
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: PORT
+        value: 3000
+    healthCheckPath: /api/health
+    autoDeploy: true

@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+backend/node_modules/
+
+# Environment files (keep .env.example, ignore actual .env)
+.env
+backend/.env
+
+# Build outputs
+dist/
+build/
+
+# Log files
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# SQLite database files (local dev)
+backend/data/*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+tmp/
+temp/
+
+# Coverage reports
+coverage/
+
+# Gemini AI assistant folder
+.gemini/

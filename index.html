@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Free Resume Builder Online - Create Professional Resume in Minutes | Resumely</title>
+    <meta name="description"
+        content="Create a professional resume for free with Resumely. 10+ beautiful templates, real-time preview, PDF export, and ATS-optimized. No sign-up required. Build your resume in minutes!">
+    <meta name="keywords"
+        content="free resume builder, resume maker online, cv builder, professional resume, resume template, job resume, career resume, resume creator, cv maker, free cv builder, resume generator, ATS resume">
+    <meta name="author" content="Resumely">
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical URL - Update this after deployment -->
+    <link rel="canonical" href="https://resumely-builder.netlify.app/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://resumely-builder.netlify.app/">
+    <meta property="og:title" content="Free Resume Builder Online - Create Professional Resume | Resumely">
+    <meta property="og:description"
+        content="Create a professional resume for free with 10+ templates, real-time preview, and PDF export. No sign-up required!">
+    <meta property="og:image" content="https://resumely-builder.netlify.app/og-image.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://resumely-builder.netlify.app/">
+    <meta name="twitter:title" content="Free Resume Builder Online - Create Professional Resume | Resumely">
+    <meta name="twitter:description"
+        content="Create a professional resume for free with 10+ templates, real-time preview, and PDF export. No sign-up required!">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310B981' stroke-width='2'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/><line x1='16' y1='13' x2='8' y2='13'/><line x1='16' y1='17' x2='8' y2='17'/><polyline points='10 9 9 9 8 9'/></svg>">
+    <link rel="apple-touch-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/></svg>">
+    <meta name="theme-color" content="#10B981">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&family=Lato:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/ads.css">
+
+    <!-- PDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- Google AdSense -->
+    <!-- Replace 'ca-pub-XXXXXXXXXXXXXXXX' with your actual AdSense Publisher ID after approval -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <span class="logo-text">Resumely</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <span class="header-tagline">Create Your Professional Resume - 100% Free</span>
+        </div>
+        <div class="header-right">
+            <button class="btn btn-ghost" id="undoBtn" title="Undo (Ctrl+Z)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 7v6h6" />
+                    <path d="M21 17a9 9 0 00-9-9 9 9 0 00-6 2.3L3 13" />
+                </svg>
+            </button>
+            <button class="btn btn-ghost" id="redoBtn" title="Redo (Ctrl+Y)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 7v6h-6" />
+                    <path d="M3 17a9 9 0 019-9 9 9 0 016 2.3l3 2.7" />
+                </svg>
+            </button>
+            <div class="header-divider"></div>
+            <button class="btn btn-ghost" id="saveBtn" title="Save Resume">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" />
+                    <polyline points="17 21 17 13 7 13 7 21" />
+                    <polyline points="7 3 7 8 15 8" />
+                </svg>
+                <span>Save</span>
+            </button>
+            <button class="btn btn-ghost" id="loadBtn" title="Load Resume">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+                <span>Load</span>
+            </button>
+            <div class="header-divider"></div>
+            <button class="btn btn-toggle active" id="livePreviewToggle" title="Toggle Preview Panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-live">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                </svg>
+                <span>Preview</span>
+            </button>
+            <div class="export-dropdown">
+                <button class="btn btn-primary" id="exportBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    <span>Export</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-arrow">
+                        <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                </button>
+                <div class="export-menu" id="exportMenu">
+                    <button class="export-option" id="downloadPdfBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        <span>Download PDF</span>
+                    </button>
+                    <button class="export-option" id="printBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 6 2 18 2 18 9" />
+                            <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2" />
+                            <rect x="6" y="14" width="12" height="8" />
+                        </svg>
+                        <span>Print</span>
+                    </button>
+                </div>
+            </div>
+            <button class="btn btn-ghost" id="accountBtn" title="Account">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+                <span>Sign In</span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-section="personal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    <span>Personal Info</span>
+                </button>
+                <button class="nav-item" data-section="experience">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                        <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
+                    </svg>
+                    <span>Experience</span>
+                </button>
+                <button class="nav-item" data-section="education">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                        <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                    </svg>
+                    <span>Education</span>
+                </button>
+                <button class="nav-item" data-section="skills">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon
+                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                    <span>Skills</span>
+                </button>
+                <button class="nav-item" data-section="projects">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+                    </svg>
+                    <span>Projects</span>
+                </button>
+                <button class="nav-item" data-section="certifications">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="7" />
+                        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+                    </svg>
+                    <span>Certifications</span>
+                </button>
+                <button class="nav-item" data-section="languages">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path
+                            d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                    </svg>
+                    <span>Languages</span>
+                </button>
+                <button class="nav-item" data-section="awards">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9H4.5a2.5 2.5 0 010-5C7 4 7 8 7 8" />
+                        <path d="M18 9h1.5a2.5 2.5 0 000-5C17 4 17 8 17 8" />
+                        <path d="M4 22h16" />
+                        <path d="M10 22V8a2 2 0 00-2-2H6v11a3 3 0 003 3h6a3 3 0 003-3V6h-2a2 2 0 00-2 2v14" />
+                    </svg>
+                    <span>Awards</span>
+                </button>
+                <button class="nav-item" data-section="references">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                        <path d="M16 3.13a4 4 0 010 7.75" />
+                    </svg>
+                    <span>References</span>
+                </button>
+                <button class="nav-item" data-section="custom">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    <span>Custom Section</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn btn-outline btn-full" id="historyBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    <span>History</span>
+                </button>
+                <button class="btn btn-outline btn-full" id="templatesBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <line x1="3" y1="9" x2="21" y2="9" />
+                        <line x1="9" y1="21" x2="9" y2="9" />
+                    </svg>
+                    <span>Templates</span>
+                </button>
+                <button class="btn btn-outline btn-full" id="customizeBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
+                    </svg>
+                    <span>Customize</span>
+                </button>
+
+                <div class="ats-score" id="atsScore">
+                    <div class="ats-score-header">
+                        <span>ATS Score</span>
+                        <span class="ats-score-value">0%</span>
+                    </div>
+                    <div class="ats-score-bar">
+                        <div class="ats-score-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Editor Panel -->
+        <section class="editor-panel">
+            <div class="editor-header">
+                <h2 class="editor-title" id="editorTitle">Personal Information</h2>
+                <div class="editor-actions">
+                    <button class="btn btn-ghost btn-sm" id="tipsBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3" />
+                            <line x1="12" y1="17" x2="12.01" y2="17" />
+                        </svg>
+                        <span>Tips</span>
+                    </button>
+                </div>
+            </div>
+            <div class="editor-content" id="editorContent">
+                <!-- Dynamic form content will be inserted here -->
+            </div>
+        </section>
+
+        <!-- Preview Panel -->
+        <section class="preview-panel">
+            <div class="preview-header">
+                <h2 class="preview-title">Live Preview</h2>
+                <div class="preview-controls">
+                    <button class="btn btn-ghost btn-sm" id="zoomOutBtn" title="Zoom Out">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            <line x1="8" y1="11" x2="14" y2="11" />
+                        </svg>
+                    </button>
+                    <span class="zoom-level" id="zoomLevel">100%</span>
+                    <button class="btn btn-ghost btn-sm" id="zoomInBtn" title="Zoom In">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            <line x1="11" y1="8" x2="11" y2="14" />
+                            <line x1="8" y1="11" x2="14" y2="11" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="preview-content" id="previewContent">
+                <div class="resume-paper" id="resumePaper">
+                    <!-- Resume preview will be rendered here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Templates Modal -->
+    <div class="modal" id="templatesModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>Choose a Template</h3>
+                <button class="modal-close" data-close>&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="template-grid" id="templateGrid">
+                    <div class="template-card active" data-template="modern">
+                        <div class="template-preview template-modern"></div>
+                        <span class="template-name">Modern</span>
+                    </div>
+                    <div class="template-card" data-template="classic">
+                        <div class="template-preview template-classic"></div>
+                        <span class="template-name">Classic</span>
+                    </div>
+                    <div class="template-card" data-template="creative">
+                        <div class="template-preview template-creative"></div>
+                        <span class="template-name">Creative</span>
+                    </div>
+                    <div class="template-card" data-template="minimal">
+                        <div class="template-preview template-minimal"></div>
+                        <span class="template-name">Minimal</span>
+                    </div>
+                    <div class="template-card" data-template="ats">
+                        <div class="template-preview template-ats"></div>
+                        <span class="template-name">ATS-Friendly</span>
+                    </div>
+                    <div class="template-card" data-template="executive">
+                        <div class="template-preview template-executive"></div>
+                        <span class="template-name">Executive</span>
+                    </div>
+                    <div class="template-card" data-template="tech">
+                        <div class="template-preview template-tech"></div>
+                        <span class="template-name">Tech</span>
+                    </div>
+                    <div class="template-card" data-template="elegant">
+                        <div class="template-preview template-elegant"></div>
+                        <span class="template-name">Elegant</span>
+                    </div>
+                    <div class="template-card" data-template="bold">
+                        <div class="template-preview template-bold"></div>
+                        <span class="template-name">Bold</span>
+                    </div>
+                    <div class="template-card" data-template="timeline">
+                        <div class="template-preview template-timeline"></div>
+                        <span class="template-name">Timeline</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customize Modal -->
+    <div class="modal" id="customizeModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Customize Resume</h3>
+                <button class="modal-close" data-close>&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="customize-section">
+                    <h4>Accent Color</h4>
+                    <div class="color-picker-row">
+                        <input type="color" id="accentColor" value="#10B981" class="color-picker">
+                        <div class="preset-colors">
+                            <button class="preset-color" data-color="#10B981" style="background: #10B981"></button>
+                            <button class="preset-color" data-color="#3B82F6" style="background: #3B82F6"></button>
+                            <button class="preset-color" data-color="#8B5CF6" style="background: #8B5CF6"></button>
+                            <button class="preset-color" data-color="#EF4444" style="background: #EF4444"></button>
+                            <button class="preset-color" data-color="#F59E0B" style="background: #F59E0B"></button>
+                            <button class="preset-color" data-color="#EC4899" style="background: #EC4899"></button>
+                            <button class="preset-color" data-color="#14B8A6" style="background: #14B8A6"></button>
+                            <button class="preset-color" data-color="#64748B" style="background: #64748B"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="customize-section">
+                    <h4>Font Style</h4>
+                    <div class="font-options" style="max-height: 300px; overflow-y: auto;">
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="professional" checked>
+                            <span class="font-option-label" style="font-family: 'Merriweather', serif">Merriweather
+                                (Elegant Serif)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="modern">
+                            <span class="font-option-label" style="font-family: 'Inter', sans-serif">Inter (Modern
+                                Sans)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="roboto">
+                            <span class="font-option-label" style="font-family: 'Roboto', sans-serif">Roboto (Clean &
+                                Neutral)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="poppins">
+                            <span class="font-option-label" style="font-family: 'Poppins', sans-serif">Poppins
+                                (Geometric)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="lato">
+                            <span class="font-option-label" style="font-family: 'Lato', sans-serif">Lato
+                                (Friendly)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="opensans">
+                            <span class="font-option-label" style="font-family: 'Open Sans', sans-serif">Open Sans
+                                (Readable)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="playfair">
+                            <span class="font-option-label" style="font-family: 'Playfair Display', serif">Playfair
+                                Display (Luxurious)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="montserrat">
+                            <span class="font-option-label" style="font-family: 'Montserrat', sans-serif">Montserrat
+                                (Bold & Modern)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="raleway">
+                            <span class="font-option-label" style="font-family: 'Raleway', sans-serif">Raleway (Thin &
+                                Elegant)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="sourcesans">
+                            <span class="font-option-label" style="font-family: 'Source Sans 3', sans-serif">Source Sans
+                                (Technical)</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="customize-section">
+                    <h4>Font Size</h4>
+                    <div class="slider-row">
+                        <input type="range" id="fontSizeSlider" min="10" max="14" value="12" class="slider">
+                        <span id="fontSizeValue">12px</span>
+                    </div>
+                </div>
+                <div class="customize-section">
+                    <h4>Section Spacing</h4>
+                    <div class="slider-row">
+                        <input type="range" id="spacingSlider" min="1" max="3" value="2" step="0.5" class="slider">
+                        <span id="spacingValue">Normal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tips Modal -->
+    <div class="modal" id="tipsModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Resume Tips</h3>
+                <button class="modal-close" data-close>&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="tips-list" id="tipsList">
+                    <!-- Tips will be dynamically inserted -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div class="modal" id="historyModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content modal-md">
+            <div class="modal-header">
+                <h3>Resume History</h3>
+                <button class="modal-close" data-close>&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="history-list" id="historyList">
+                    <!-- History items will be dynamically inserted -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost btn-sm" id="clearHistoryBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
+                    </svg>
+                    Clear All History
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-message"></span>
+    </div>
+
+    <!-- Auto-save indicator -->
+    <div class="autosave-indicator" id="autosaveIndicator">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" />
+            <polyline points="17 21 17 13 7 13 7 21" />
+        </svg>
+        <span>Auto-saved</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="scripts/api.js"></script>
+    <script src="scripts/auth-ui.js"></script>
+    <script src="scripts/resume-data.js"></script>
+    <script src="scripts/templates.js"></script>
+    <script src="scripts/form-builder.js"></script>
+    <script src="scripts/preview.js"></script>
+    <script src="scripts/features.js"></script>
+    <script src="scripts/export.js"></script>
+    <script src="scripts/history.js"></script>
+    <script src="scripts/interstitial-ad.js"></script>
+    <script src="scripts/app.js"></script>
+
+    <!-- Fullscreen Interstitial Ad Overlay -->
+    <div class="interstitial-overlay" id="interstitialAd">
+        <div class="interstitial-container">
+            <button class="interstitial-close-btn" id="interstitialCloseBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="interstitial-timer" id="interstitialTimer">10</div>
+            <div class="interstitial-content">
+                <!-- Google AdSense In-Article/Display Ad -->
+                <!-- Replace data-ad-slot with your actual ad slot ID after AdSense approval -->
+                <div class="adsense-container" id="adsenseAdContainer">
+                    <ins class="adsbygoogle"
+                        style="display:block; width:100%; max-width:336px; height:280px; margin:0 auto;"
+                        data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="rectangle"
+                        data-full-width-responsive="false"></ins>
+                </div>
+                <!-- Fallback content when AdSense not loaded -->
+                <div class="interstitial-ad-visual" id="adFallback">
+                    <div class="ad-icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </div>
+                    <h2 class="ad-title">Resumely Premium</h2>
+                    <p class="ad-subtitle">Create stunning professional resumes in minutes</p>
+                    <div class="ad-features">
+                        <span class="ad-feature">✓ 10+ Templates</span>
+                        <span class="ad-feature">✓ PDF Export</span>
+                        <span class="ad-feature">✓ ATS Optimized</span>
+                    </div>
+                    <div class="ad-cta">
+                        <span class="ad-badge">SPONSORED</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
