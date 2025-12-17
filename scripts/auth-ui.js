@@ -19,107 +19,35 @@ const AuthUI = (function () {
             <div class="modal-backdrop"></div>
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 id="authModalTitle">Sign In</h3>
+                    <h3 id="authModalTitle">Account</h3>
                     <button class="modal-close" data-close>&times;</button>
                 </div>
                 <div class="modal-body">
-                    <!-- Login Form -->
-                    <form id="loginForm" class="auth-form">
-                        <div class="form-group">
-                            <label for="loginEmail">Email</label>
-                            <input type="email" id="loginEmail" class="form-control" placeholder="you@example.com" required>
+                    <!-- Coming Soon Message -->
+                    <div class="coming-soon-view" style="text-align: center; padding: 30px 20px;">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #10B981 0%, #059669 100%); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="width: 40px; height: 40px;">
+                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
                         </div>
-                        <div class="form-group">
-                            <label for="loginPassword">Password</label>
-                            <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
-                        </div>
-                        <div class="form-error" id="loginError"></div>
-                        <button type="submit" class="btn btn-primary btn-full">
-                            <span>Sign In</span>
-                        </button>
-                        <p class="auth-switch">
-                            Don't have an account? <a href="#" id="showRegister">Create one</a>
+                        <h3 style="color: #fff; margin-bottom: 12px; font-size: 20px;">Cloud Sync Coming Soon!</h3>
+                        <p style="color: rgba(255,255,255,0.7); margin-bottom: 20px; line-height: 1.6;">
+                            Account login with cloud backup is coming soon. 
+                            <br><br>
+                            <strong style="color: #10B981;">Good news:</strong> Your resume is automatically saved in your browser!
                         </p>
-                    </form>
-
-                    <!-- Register Form -->
-                    <form id="registerForm" class="auth-form" style="display: none;">
-                        <div class="form-group">
-                            <label for="registerName">Full Name</label>
-                            <input type="text" id="registerName" class="form-control" placeholder="John Doe">
+                        <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+                            <p style="color: #10B981; margin: 0; font-size: 14px;">
+                                ✓ All your data is saved locally<br>
+                                ✓ Use Save button to keep your progress<br>
+                                ✓ Export to PDF anytime
+                            </p>
                         </div>
-                        <div class="form-group">
-                            <label for="registerEmail">Email</label>
-                            <input type="email" id="registerEmail" class="form-control" placeholder="you@example.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="registerPassword">Password</label>
-                            <input type="password" id="registerPassword" class="form-control" placeholder="Min. 8 characters" required>
-                            <small class="form-hint">Must have uppercase, lowercase, and a number</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="registerConfirm">Confirm Password</label>
-                            <input type="password" id="registerConfirm" class="form-control" placeholder="••••••••" required>
-                        </div>
-                        <div class="form-error" id="registerError"></div>
-                        <button type="submit" class="btn btn-primary btn-full">
-                            <span>Create Account</span>
+                        <button class="btn btn-primary btn-full" onclick="AuthUI.close()">
+                            Got it!
                         </button>
-                        <p class="auth-switch">
-                            Already have an account? <a href="#" id="showLogin">Sign in</a>
-                        </p>
-                    </form>
-
-                    <!-- Account View -->
-                    <div id="accountView" class="account-view" style="display: none;">
-                        <div class="account-header">
-                            <div class="account-avatar" id="accountAvatar">U</div>
-                            <div class="account-info">
-                                <h4 id="accountName">User</h4>
-                                <p id="accountEmail">user@example.com</p>
-                            </div>
-                        </div>
-                        <div class="account-stats">
-                            <div class="stat">
-                                <span class="stat-value" id="resumeCount">0</span>
-                                <span class="stat-label">Resumes</span>
-                            </div>
-                        </div>
-                        <div class="account-actions">
-                            <button class="btn btn-outline btn-full" id="changePasswordBtn">
-                                Change Password
-                            </button>
-                            <button class="btn btn-ghost btn-full" id="logoutBtn">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
-                                    <polyline points="16 17 21 12 16 7"/>
-                                    <line x1="21" y1="12" x2="9" y2="12"/>
-                                </svg>
-                                Logout
-                            </button>
-                        </div>
                     </div>
-
-                    <!-- Change Password Form -->
-                    <form id="changePasswordForm" class="auth-form" style="display: none;">
-                        <div class="form-group">
-                            <label for="currentPassword">Current Password</label>
-                            <input type="password" id="currentPassword" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="newPassword">New Password</label>
-                            <input type="password" id="newPassword" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirmNewPassword">Confirm New Password</label>
-                            <input type="password" id="confirmNewPassword" class="form-control" required>
-                        </div>
-                        <div class="form-error" id="changePasswordError"></div>
-                        <div class="form-actions">
-                            <button type="button" class="btn btn-ghost" id="cancelPasswordChange">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Change Password</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         `;
@@ -134,32 +62,9 @@ const AuthUI = (function () {
     // ==========================================
 
     function bindEvents(modal) {
-        // Close modal
+        // Close modal on backdrop click or close button
         modal.querySelector('.modal-backdrop').addEventListener('click', close);
         modal.querySelector('[data-close]').addEventListener('click', close);
-
-        // Switch between login and register
-        modal.querySelector('#showRegister').addEventListener('click', (e) => {
-            e.preventDefault();
-            showRegister();
-        });
-
-        modal.querySelector('#showLogin').addEventListener('click', (e) => {
-            e.preventDefault();
-            showLogin();
-        });
-
-        // Login form
-        modal.querySelector('#loginForm').addEventListener('submit', handleLogin);
-
-        // Register form
-        modal.querySelector('#registerForm').addEventListener('submit', handleRegister);
-
-        // Account actions
-        modal.querySelector('#logoutBtn').addEventListener('click', handleLogout);
-        modal.querySelector('#changePasswordBtn').addEventListener('click', showChangePassword);
-        modal.querySelector('#cancelPasswordChange').addEventListener('click', showAccount);
-        modal.querySelector('#changePasswordForm').addEventListener('submit', handleChangePassword);
     }
 
     // ==========================================
