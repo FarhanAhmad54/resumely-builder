@@ -190,6 +190,180 @@ const Templates = (function () {
                     ${renderProjects(data.projects)}
                 </div>`;
             }
+        },
+        noir: {
+            name: 'Noir',
+            render: function (data, settings) {
+                return `
+                <div class="resume-content resume-noir" style="--accent: #000000; font-family: ${getFontFamily(settings.fontStyle)}; font-size: ${settings.fontSize}pt; padding: 50px; background: #ffffff; color: #000000;">
+                    <div style="text-align: center; margin-bottom: 35px; padding-bottom: 25px; border-bottom: 3px solid #000000;">
+                        ${data.personal.photo && settings.showPhoto ? `<img src="${data.personal.photo}" style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid #000000; margin-bottom: 20px;">` : ''}
+                        <h1 style="font-size: 32pt; font-weight: 800; color: #000000; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px;">${escapeHtml(data.personal.firstName)} ${escapeHtml(data.personal.lastName)}</h1>
+                        ${data.personal.title ? `<div style="font-size: 13pt; color: #333333; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;">${escapeHtml(data.personal.title)}</div>` : ''}
+                        <div style="margin-top: 18px; font-size: 10pt; color: #444444;">${[data.personal.email, data.personal.phone, data.personal.location, data.personal.linkedin].filter(Boolean).map(escapeHtml).join(' • ')}</div>
+                    </div>
+                    ${data.personal.summary ? `<div style="margin-bottom: 30px; padding: 20px; background: #f5f5f5; border-left: 4px solid #000000;"><p style="font-size: 11pt; line-height: 1.7; color: #222222; margin: 0;">${escapeHtml(data.personal.summary)}</p></div>` : ''}
+                    ${data.experience.length > 0 ? `<div style="margin-bottom: 30px;"><div style="font-size: 13pt; font-weight: 700; color: #000000; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #000000;">Experience</div>${data.experience.map(e => `<div style="margin-bottom: 20px;"><div style="display: flex; justify-content: space-between; align-items: baseline;"><strong style="font-size: 12pt; color: #000000;">${escapeHtml(e.position)}</strong><span style="font-size: 10pt; color: #555555;">${formatDateRange(e.startDate, e.endDate, e.current)}</span></div><div style="font-size: 10pt; color: #333333; margin-top: 3px;">${escapeHtml(e.company)}${e.location ? ' | ' + escapeHtml(e.location) : ''}</div>${e.description ? `<div style="margin-top: 10px; font-size: 10pt; color: #444444; line-height: 1.6;">${escapeHtml(e.description)}</div>` : ''}</div>`).join('')}</div>` : ''}
+                    ${data.education.length > 0 ? `<div style="margin-bottom: 30px;"><div style="font-size: 13pt; font-weight: 700; color: #000000; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #000000;">Education</div>${data.education.map(e => `<div style="margin-bottom: 18px;"><div style="display: flex; justify-content: space-between; align-items: baseline;"><strong style="font-size: 11pt; color: #000000;">${escapeHtml(e.degree)}${e.field ? ' in ' + escapeHtml(e.field) : ''}</strong><span style="font-size: 10pt; color: #555555;">${formatDateRange(e.startDate, e.endDate, e.current)}</span></div><div style="font-size: 10pt; color: #333333; margin-top: 3px;">${escapeHtml(e.institution)}${e.location ? ', ' + escapeHtml(e.location) : ''}</div>${e.gpa ? `<div style="font-size: 10pt; color: #444444; margin-top: 3px;">GPA: ${escapeHtml(e.gpa)}</div>` : ''}</div>`).join('')}</div>` : ''}
+                    ${data.skills.length > 0 ? `<div style="margin-bottom: 30px;"><div style="font-size: 13pt; font-weight: 700; color: #000000; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #000000;">Skills</div><div style="display: flex; flex-wrap: wrap; gap: 10px;">${data.skills.map(s => `<span style="padding: 8px 16px; background: #000000; color: #ffffff; font-size: 9pt; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">${escapeHtml(s.name)}</span>`).join('')}</div></div>` : ''}
+                    ${data.projects.length > 0 ? `<div style="margin-bottom: 30px;"><div style="font-size: 13pt; font-weight: 700; color: #000000; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #000000;">Projects</div>${data.projects.map(p => `<div style="margin-bottom: 18px;"><div style="display: flex; justify-content: space-between; align-items: baseline;"><strong style="font-size: 11pt; color: #000000;">${escapeHtml(p.name)}</strong><span style="font-size: 10pt; color: #555555;">${formatDateRange(p.startDate, p.endDate)}</span></div>${p.description ? `<div style="margin-top: 8px; font-size: 10pt; color: #444444; line-height: 1.6;">${escapeHtml(p.description)}</div>` : ''}${p.technologies ? `<div style="font-size: 9pt; color: #666666; margin-top: 6px;">Technologies: ${escapeHtml(p.technologies)}</div>` : ''}</div>`).join('')}</div>` : ''}
+                    ${data.certifications.length > 0 ? `<div style="margin-bottom: 30px;"><div style="font-size: 13pt; font-weight: 700; color: #000000; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #000000;">Certifications</div>${data.certifications.map(c => `<div style="margin-bottom: 12px;"><div style="display: flex; justify-content: space-between; align-items: baseline;"><strong style="font-size: 11pt; color: #000000;">${escapeHtml(c.name)}</strong><span style="font-size: 10pt; color: #555555;">${c.date || ''}</span></div><div style="font-size: 10pt; color: #444444;">${escapeHtml(c.issuer)}</div></div>`).join('')}</div>` : ''}
+                    ${data.languages.length > 0 ? `<div style="margin-bottom: 30px;"><div style="font-size: 13pt; font-weight: 700; color: #000000; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #000000;">Languages</div><div style="display: flex; flex-wrap: wrap; gap: 20px;">${data.languages.map(l => `<span style="font-size: 10pt; color: #222222;"><strong>${escapeHtml(l.name)}</strong> <em style="color: #555555;">(${l.proficiency})</em></span>`).join('')}</div></div>` : ''}
+                    ${data.awards.length > 0 ? `<div style="margin-bottom: 30px;"><div style="font-size: 13pt; font-weight: 700; color: #000000; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #000000;">Awards & Achievements</div>${data.awards.map(a => `<div style="margin-bottom: 15px;"><div style="display: flex; justify-content: space-between; align-items: baseline;"><strong style="font-size: 11pt; color: #000000;">${escapeHtml(a.title)}</strong><span style="font-size: 10pt; color: #555555;">${a.date || ''}</span></div>${a.issuer ? `<div style="font-size: 10pt; color: #444444;">${escapeHtml(a.issuer)}</div>` : ''}${a.description ? `<div style="margin-top: 6px; font-size: 10pt; color: #555555;">${escapeHtml(a.description)}</div>` : ''}</div>`).join('')}</div>` : ''}
+                    ${data.references.length > 0 ? `<div style="margin-bottom: 30px;"><div style="font-size: 13pt; font-weight: 700; color: #000000; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #000000;">References</div><div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">${data.references.map(r => `<div style="padding: 15px; background: #f5f5f5; border-left: 3px solid #000000;"><div style="font-weight: 700; color: #000000;">${escapeHtml(r.name)}</div><div style="font-size: 10pt; color: #444444;">${escapeHtml(r.position)}${r.company ? ' at ' + escapeHtml(r.company) : ''}</div><div style="font-size: 9pt; color: #555555; margin-top: 8px;">${[r.email, r.phone].filter(Boolean).map(escapeHtml).join(' • ')}</div></div>`).join('')}</div></div>` : ''}
+                </div>`;
+            }
+        },
+        gradient: {
+            name: 'Gradient',
+            render: function (data, settings) {
+                const gradientStart = settings.accentColor;
+                const gradientEnd = adjustColor(settings.accentColor, -40);
+                return `
+                <div class="resume-content resume-gradient" style="--accent: ${settings.accentColor}; font-family: ${getFontFamily(settings.fontStyle)}; font-size: ${settings.fontSize}pt; min-height: 100%;">
+                    <div style="background: linear-gradient(135deg, ${gradientStart} 0%, ${gradientEnd} 100%); color: white; padding: 40px; margin: -20px -20px 30px -20px; border-radius: 0 0 30px 30px;">
+                        <div style="display: flex; align-items: center; gap: 25px;">
+                            ${data.personal.photo && settings.showPhoto ? `<img src="${data.personal.photo}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 8px 32px rgba(0,0,0,0.2);">` : ''}
+                            <div>
+                                <h1 style="font-size: 28pt; font-weight: 700; margin-bottom: 6px; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">${escapeHtml(data.personal.firstName)} ${escapeHtml(data.personal.lastName)}</h1>
+                                ${data.personal.title ? `<div style="font-size: 13pt; opacity: 0.95; font-weight: 400;">${escapeHtml(data.personal.title)}</div>` : ''}
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 20px; font-size: 10pt; opacity: 0.9;">
+                            ${data.personal.email ? `<span>📧 ${escapeHtml(data.personal.email)}</span>` : ''}
+                            ${data.personal.phone ? `<span>📱 ${escapeHtml(data.personal.phone)}</span>` : ''}
+                            ${data.personal.location ? `<span>📍 ${escapeHtml(data.personal.location)}</span>` : ''}
+                            ${data.personal.linkedin ? `<span>💼 ${escapeHtml(data.personal.linkedin)}</span>` : ''}
+                        </div>
+                    </div>
+                    <div style="padding: 0 30px 30px;">
+                        ${data.personal.summary ? `<div style="margin-bottom: 25px; padding: 20px; background: linear-gradient(135deg, rgba(${parseInt(gradientStart.slice(1, 3), 16)},${parseInt(gradientStart.slice(3, 5), 16)},${parseInt(gradientStart.slice(5, 7), 16)},0.1) 0%, rgba(${parseInt(gradientEnd.slice(1, 3), 16)},${parseInt(gradientEnd.slice(3, 5), 16)},${parseInt(gradientEnd.slice(5, 7), 16)},0.05) 100%); border-radius: 12px; border-left: 4px solid ${settings.accentColor};"><p style="margin: 0; line-height: 1.7; color: #444;">${escapeHtml(data.personal.summary)}</p></div>` : ''}
+                        ${data.skills.length > 0 ? `<div style="margin-bottom: 25px;"><div style="font-size: 12pt; font-weight: 600; color: ${settings.accentColor}; margin-bottom: 12px;">Skills</div><div style="display: flex; flex-wrap: wrap; gap: 8px;">${data.skills.map(s => `<span style="padding: 8px 16px; background: linear-gradient(135deg, ${gradientStart}, ${gradientEnd}); color: white; border-radius: 20px; font-size: 9pt; font-weight: 500;">${escapeHtml(s.name)}</span>`).join('')}</div></div>` : ''}
+                        ${data.experience.length > 0 ? `<div style="margin-bottom: 25px;"><div style="font-size: 12pt; font-weight: 600; color: ${settings.accentColor}; margin-bottom: 15px;">Experience</div>${data.experience.map(e => `<div style="margin-bottom: 18px; padding-left: 15px; border-left: 3px solid ${settings.accentColor};"><div style="font-weight: 600; font-size: 11pt; color: #333;">${escapeHtml(e.position)}</div><div style="font-size: 10pt; color: #666; margin: 4px 0;">${escapeHtml(e.company)} • ${formatDateRange(e.startDate, e.endDate, e.current)}</div>${e.description ? `<div style="font-size: 10pt; color: #555; margin-top: 8px;">${escapeHtml(e.description)}</div>` : ''}</div>`).join('')}</div>` : ''}
+                        ${data.education.length > 0 ? `<div style="margin-bottom: 25px;"><div style="font-size: 12pt; font-weight: 600; color: ${settings.accentColor}; margin-bottom: 15px;">Education</div>${data.education.map(e => `<div style="margin-bottom: 15px; padding-left: 15px; border-left: 3px solid ${settings.accentColor};"><div style="font-weight: 600; color: #333;">${escapeHtml(e.degree)}${e.field ? ' in ' + escapeHtml(e.field) : ''}</div><div style="font-size: 10pt; color: #666;">${escapeHtml(e.institution)} • ${formatDateRange(e.startDate, e.endDate, e.current)}</div></div>`).join('')}</div>` : ''}
+                        ${renderProjects(data.projects)}
+                        ${renderCertifications(data.certifications)}
+                    </div>
+                </div>`;
+            }
+        },
+        metro: {
+            name: 'Metro',
+            render: function (data, settings) {
+                return `
+                <div class="resume-content resume-metro" style="--accent: ${settings.accentColor}; font-family: 'Segoe UI', ${getFontFamily(settings.fontStyle)}; font-size: ${settings.fontSize}pt; padding: 0; background: #f0f0f0;">
+                    <div style="display: grid; grid-template-columns: 1fr 2fr; min-height: 100%;">
+                        <div style="background: ${settings.accentColor}; color: white; padding: 30px;">
+                            ${data.personal.photo && settings.showPhoto ? `<img src="${data.personal.photo}" style="width: 100%; aspect-ratio: 1; object-fit: cover; margin-bottom: 20px;">` : ''}
+                            <h1 style="font-size: 20pt; font-weight: 300; margin-bottom: 5px;">${escapeHtml(data.personal.firstName)}</h1>
+                            <h1 style="font-size: 20pt; font-weight: 600; margin-bottom: 15px;">${escapeHtml(data.personal.lastName)}</h1>
+                            ${data.personal.title ? `<div style="font-size: 11pt; opacity: 0.9; margin-bottom: 25px; font-weight: 300;">${escapeHtml(data.personal.title)}</div>` : ''}
+                            <div style="font-size: 9pt; line-height: 2;">
+                                ${data.personal.email ? `<div>✉ ${escapeHtml(data.personal.email)}</div>` : ''}
+                                ${data.personal.phone ? `<div>☎ ${escapeHtml(data.personal.phone)}</div>` : ''}
+                                ${data.personal.location ? `<div>⌂ ${escapeHtml(data.personal.location)}</div>` : ''}
+                                ${data.personal.linkedin ? `<div>◉ ${escapeHtml(data.personal.linkedin)}</div>` : ''}
+                            </div>
+                            ${data.skills.length > 0 ? `<div style="margin-top: 25px;"><div style="font-size: 11pt; font-weight: 600; margin-bottom: 12px; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 8px;">SKILLS</div>${data.skills.map(s => `<div style="display: flex; align-items: center; margin-bottom: 8px;"><div style="width: 8px; height: 8px; background: white; margin-right: 10px;"></div><span style="font-size: 9pt;">${escapeHtml(s.name)}</span></div>`).join('')}</div>` : ''}
+                            ${data.languages.length > 0 ? `<div style="margin-top: 25px;"><div style="font-size: 11pt; font-weight: 600; margin-bottom: 12px; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 8px;">LANGUAGES</div>${data.languages.map(l => `<div style="margin-bottom: 8px; font-size: 9pt;">${escapeHtml(l.name)} - ${l.proficiency}</div>`).join('')}</div>` : ''}
+                        </div>
+                        <div style="background: white; padding: 30px;">
+                            ${data.personal.summary ? `<div style="margin-bottom: 25px; padding: 20px; background: #f8f8f8;"><p style="margin: 0; font-size: 10pt; line-height: 1.7; color: #444;">${escapeHtml(data.personal.summary)}</p></div>` : ''}
+                            ${data.experience.length > 0 ? `<div style="margin-bottom: 25px;"><div style="font-size: 14pt; font-weight: 300; color: ${settings.accentColor}; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px;">Experience</div>${data.experience.map(e => `<div style="margin-bottom: 20px; padding-left: 15px; border-left: 4px solid ${settings.accentColor};"><div style="font-weight: 600; font-size: 11pt;">${escapeHtml(e.position)}</div><div style="font-size: 10pt; color: #666;">${escapeHtml(e.company)} | ${formatDateRange(e.startDate, e.endDate, e.current)}</div>${e.description ? `<div style="margin-top: 8px; font-size: 10pt; color: #555;">${escapeHtml(e.description)}</div>` : ''}</div>`).join('')}</div>` : ''}
+                            ${data.education.length > 0 ? `<div style="margin-bottom: 25px;"><div style="font-size: 14pt; font-weight: 300; color: ${settings.accentColor}; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px;">Education</div>${data.education.map(e => `<div style="margin-bottom: 15px; padding-left: 15px; border-left: 4px solid ${settings.accentColor};"><div style="font-weight: 600;">${escapeHtml(e.degree)}${e.field ? ' in ' + escapeHtml(e.field) : ''}</div><div style="font-size: 10pt; color: #666;">${escapeHtml(e.institution)} | ${formatDateRange(e.startDate, e.endDate, e.current)}</div></div>`).join('')}</div>` : ''}
+                            ${data.projects.length > 0 ? `<div style="margin-bottom: 25px;"><div style="font-size: 14pt; font-weight: 300; color: ${settings.accentColor}; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px;">Projects</div><div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">${data.projects.map(p => `<div style="padding: 15px; background: ${settings.accentColor}; color: white;"><div style="font-weight: 600; font-size: 10pt;">${escapeHtml(p.name)}</div>${p.description ? `<div style="font-size: 9pt; margin-top: 8px; opacity: 0.9;">${escapeHtml(p.description).substring(0, 100)}...</div>` : ''}</div>`).join('')}</div></div>` : ''}
+                            ${renderCertifications(data.certifications)}
+                        </div>
+                    </div>
+                </div>`;
+            }
+        },
+        infographic: {
+            name: 'Infographic',
+            render: function (data, settings) {
+                const skillsCount = data.skills.length;
+                const expYears = data.experience.reduce((acc, e) => {
+                    const start = e.startDate ? new Date(e.startDate) : new Date();
+                    const end = e.current ? new Date() : (e.endDate ? new Date(e.endDate) : new Date());
+                    return acc + Math.ceil((end - start) / (1000 * 60 * 60 * 24 * 365));
+                }, 0);
+                return `
+                <div class="resume-content resume-infographic" style="--accent: ${settings.accentColor}; font-family: ${getFontFamily(settings.fontStyle)}; font-size: ${settings.fontSize}pt; padding: 40px; background: #fafafa;">
+                    <div style="text-align: center; margin-bottom: 35px;">
+                        ${data.personal.photo && settings.showPhoto ? `<img src="${data.personal.photo}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid ${settings.accentColor}; margin-bottom: 15px;">` : ''}
+                        <h1 style="font-size: 26pt; font-weight: 700; color: #333; margin-bottom: 5px;">${escapeHtml(data.personal.firstName)} ${escapeHtml(data.personal.lastName)}</h1>
+                        ${data.personal.title ? `<div style="font-size: 12pt; color: ${settings.accentColor}; font-weight: 500;">${escapeHtml(data.personal.title)}</div>` : ''}
+                        <div style="margin-top: 15px; font-size: 10pt; color: #666;">${[data.personal.email, data.personal.phone, data.personal.location].filter(Boolean).map(escapeHtml).join(' • ')}</div>
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 35px;">
+                        <div style="text-align: center; padding: 20px 30px; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"><div style="font-size: 28pt; font-weight: 700; color: ${settings.accentColor};">${expYears}+</div><div style="font-size: 9pt; color: #666; text-transform: uppercase; letter-spacing: 1px;">Years Exp</div></div>
+                        <div style="text-align: center; padding: 20px 30px; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"><div style="font-size: 28pt; font-weight: 700; color: ${settings.accentColor};">${skillsCount}</div><div style="font-size: 9pt; color: #666; text-transform: uppercase; letter-spacing: 1px;">Skills</div></div>
+                        <div style="text-align: center; padding: 20px 30px; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"><div style="font-size: 28pt; font-weight: 700; color: ${settings.accentColor};">${data.projects.length}</div><div style="font-size: 9pt; color: #666; text-transform: uppercase; letter-spacing: 1px;">Projects</div></div>
+                    </div>
+                    ${data.personal.summary ? `<div style="margin-bottom: 30px; text-align: center; padding: 0 40px;"><p style="font-size: 10pt; line-height: 1.8; color: #555;">${escapeHtml(data.personal.summary)}</p></div>` : ''}
+                    ${data.skills.length > 0 ? `<div style="margin-bottom: 30px; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"><div style="font-size: 11pt; font-weight: 600; color: #333; margin-bottom: 15px; text-align: center;">⚡ Skills & Expertise</div><div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">${data.skills.map((s, i) => `<div style="display: flex; align-items: center; gap: 8px; padding: 8px 15px; background: ${i % 2 === 0 ? settings.accentColor : adjustColor(settings.accentColor, 20)}; color: white; border-radius: 25px; font-size: 9pt;"><span style="width: 6px; height: 6px; background: white; border-radius: 50%;"></span>${escapeHtml(s.name)}</div>`).join('')}</div></div>` : ''}
+                    ${data.experience.length > 0 ? `<div style="margin-bottom: 30px; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"><div style="font-size: 11pt; font-weight: 600; color: #333; margin-bottom: 15px;">💼 Career Journey</div><div style="position: relative;">${data.experience.map((e, i) => `<div style="display: flex; gap: 20px; margin-bottom: 20px;"><div style="width: 50px; height: 50px; background: ${settings.accentColor}; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; flex-shrink: 0;">${i + 1}</div><div style="flex: 1;"><div style="font-weight: 600; color: #333;">${escapeHtml(e.position)}</div><div style="font-size: 10pt; color: ${settings.accentColor};">${escapeHtml(e.company)}</div><div style="font-size: 9pt; color: #888;">${formatDateRange(e.startDate, e.endDate, e.current)}</div>${e.description ? `<div style="font-size: 10pt; color: #555; margin-top: 8px;">${escapeHtml(e.description)}</div>` : ''}</div></div>`).join('')}</div></div>` : ''}
+                    ${data.education.length > 0 ? `<div style="margin-bottom: 30px; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"><div style="font-size: 11pt; font-weight: 600; color: #333; margin-bottom: 15px;">🎓 Education</div>${data.education.map(e => `<div style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px;"><div style="width: 8px; height: 8px; background: ${settings.accentColor}; border-radius: 50%;"></div><div><span style="font-weight: 600;">${escapeHtml(e.degree)}</span> <span style="color: #666;">| ${escapeHtml(e.institution)}</span></div></div>`).join('')}</div>` : ''}
+                </div>`;
+            }
+        },
+        magazine: {
+            name: 'Magazine',
+            render: function (data, settings) {
+                return `
+                <div class="resume-content resume-magazine" style="--accent: ${settings.accentColor}; font-family: 'Georgia', serif; font-size: ${settings.fontSize}pt; padding: 50px; background: white;">
+                    <div style="border-bottom: 1px solid #ddd; padding-bottom: 30px; margin-bottom: 30px;">
+                        <div style="display: flex; gap: 30px; align-items: flex-start;">
+                            ${data.personal.photo && settings.showPhoto ? `<img src="${data.personal.photo}" style="width: 140px; height: 170px; object-fit: cover; filter: grayscale(20%);">` : ''}
+                            <div style="flex: 1;">
+                                <h1 style="font-size: 36pt; font-weight: 400; letter-spacing: -1px; line-height: 1; margin-bottom: 10px; color: #1a1a1a;">${escapeHtml(data.personal.firstName)}<br><strong>${escapeHtml(data.personal.lastName)}</strong></h1>
+                                ${data.personal.title ? `<div style="font-size: 14pt; font-style: italic; color: ${settings.accentColor}; margin-top: 10px;">${escapeHtml(data.personal.title)}</div>` : ''}
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px; font-size: 10pt; color: #666; font-style: italic;">${[data.personal.email, data.personal.phone, data.personal.location, data.personal.linkedin].filter(Boolean).map(escapeHtml).join(' — ')}</div>
+                    </div>
+                    ${data.personal.summary ? `<div style="margin-bottom: 30px; font-size: 13pt; line-height: 1.8; color: #333; font-style: italic; border-left: 3px solid ${settings.accentColor}; padding-left: 20px;">"${escapeHtml(data.personal.summary)}"</div>` : ''}
+                    <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px;">
+                        <div>
+                            ${data.experience.length > 0 ? `<div style="margin-bottom: 30px;"><div style="font-size: 11pt; text-transform: uppercase; letter-spacing: 3px; color: ${settings.accentColor}; margin-bottom: 20px; font-family: sans-serif; font-weight: 600;">Professional Experience</div>${data.experience.map(e => `<div style="margin-bottom: 25px;"><div style="font-size: 13pt; font-weight: 600; color: #1a1a1a;">${escapeHtml(e.position)}</div><div style="font-size: 11pt; color: #666; margin: 5px 0; font-style: italic;">${escapeHtml(e.company)} — ${formatDateRange(e.startDate, e.endDate, e.current)}</div>${e.description ? `<p style="font-size: 10pt; line-height: 1.7; color: #444; margin-top: 10px;">${escapeHtml(e.description)}</p>` : ''}</div>`).join('')}</div>` : ''}
+                            ${data.projects.length > 0 ? `<div style="margin-bottom: 30px;"><div style="font-size: 11pt; text-transform: uppercase; letter-spacing: 3px; color: ${settings.accentColor}; margin-bottom: 20px; font-family: sans-serif; font-weight: 600;">Notable Projects</div>${data.projects.map(p => `<div style="margin-bottom: 20px;"><div style="font-size: 12pt; font-weight: 600;">${escapeHtml(p.name)}</div>${p.description ? `<p style="font-size: 10pt; line-height: 1.6; color: #555; margin-top: 5px;">${escapeHtml(p.description)}</p>` : ''}</div>`).join('')}</div>` : ''}
+                        </div>
+                        <div style="border-left: 1px solid #eee; padding-left: 30px;">
+                            ${data.skills.length > 0 ? `<div style="margin-bottom: 30px;"><div style="font-size: 11pt; text-transform: uppercase; letter-spacing: 3px; color: ${settings.accentColor}; margin-bottom: 15px; font-family: sans-serif; font-weight: 600;">Expertise</div><div style="font-size: 10pt; line-height: 2; color: #444;">${data.skills.map(s => escapeHtml(s.name)).join(' • ')}</div></div>` : ''}
+                            ${data.education.length > 0 ? `<div style="margin-bottom: 30px;"><div style="font-size: 11pt; text-transform: uppercase; letter-spacing: 3px; color: ${settings.accentColor}; margin-bottom: 15px; font-family: sans-serif; font-weight: 600;">Education</div>${data.education.map(e => `<div style="margin-bottom: 15px;"><div style="font-weight: 600; font-size: 10pt;">${escapeHtml(e.degree)}</div><div style="font-size: 10pt; color: #666; font-style: italic;">${escapeHtml(e.institution)}</div></div>`).join('')}</div>` : ''}
+                            ${data.certifications.length > 0 ? `<div style="margin-bottom: 30px;"><div style="font-size: 11pt; text-transform: uppercase; letter-spacing: 3px; color: ${settings.accentColor}; margin-bottom: 15px; font-family: sans-serif; font-weight: 600;">Certifications</div>${data.certifications.map(c => `<div style="margin-bottom: 10px; font-size: 10pt;"><strong>${escapeHtml(c.name)}</strong><div style="color: #666;">${escapeHtml(c.issuer)}</div></div>`).join('')}</div>` : ''}
+                            ${data.languages.length > 0 ? `<div><div style="font-size: 11pt; text-transform: uppercase; letter-spacing: 3px; color: ${settings.accentColor}; margin-bottom: 15px; font-family: sans-serif; font-weight: 600;">Languages</div>${data.languages.map(l => `<div style="font-size: 10pt; margin-bottom: 5px;">${escapeHtml(l.name)} <span style="color: #888;">— ${l.proficiency}</span></div>`).join('')}</div>` : ''}
+                        </div>
+                    </div>
+                </div>`;
+            }
+        },
+        glassmorphism: {
+            name: 'Glass',
+            render: function (data, settings) {
+                return `
+                <div class="resume-content resume-glass" style="--accent: ${settings.accentColor}; font-family: ${getFontFamily(settings.fontStyle)}; font-size: ${settings.fontSize}pt; min-height: 100%; background: linear-gradient(135deg, ${settings.accentColor} 0%, ${adjustColor(settings.accentColor, -60)} 50%, #1a1a2e 100%); padding: 40px;">
+                    <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 35px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+                        <div style="display: flex; gap: 25px; align-items: center; margin-bottom: 30px; padding-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.15);">
+                            ${data.personal.photo && settings.showPhoto ? `<img src="${data.personal.photo}" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.3);">` : ''}
+                            <div>
+                                <h1 style="font-size: 26pt; font-weight: 700; color: white; margin-bottom: 5px; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">${escapeHtml(data.personal.firstName)} ${escapeHtml(data.personal.lastName)}</h1>
+                                ${data.personal.title ? `<div style="font-size: 12pt; color: rgba(255,255,255,0.85);">${escapeHtml(data.personal.title)}</div>` : ''}
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 25px; font-size: 10pt; color: rgba(255,255,255,0.8);">
+                            ${data.personal.email ? `<span style="display: flex; align-items: center; gap: 6px;">📧 ${escapeHtml(data.personal.email)}</span>` : ''}
+                            ${data.personal.phone ? `<span style="display: flex; align-items: center; gap: 6px;">📱 ${escapeHtml(data.personal.phone)}</span>` : ''}
+                            ${data.personal.location ? `<span style="display: flex; align-items: center; gap: 6px;">📍 ${escapeHtml(data.personal.location)}</span>` : ''}
+                        </div>
+                        ${data.personal.summary ? `<div style="margin-bottom: 25px; padding: 18px; background: rgba(255,255,255,0.08); border-radius: 12px;"><p style="margin: 0; color: rgba(255,255,255,0.9); line-height: 1.7; font-size: 10pt;">${escapeHtml(data.personal.summary)}</p></div>` : ''}
+                        ${data.skills.length > 0 ? `<div style="margin-bottom: 25px;"><div style="font-size: 11pt; font-weight: 600; color: white; margin-bottom: 12px;">Skills</div><div style="display: flex; flex-wrap: wrap; gap: 8px;">${data.skills.map(s => `<span style="padding: 6px 14px; background: rgba(255,255,255,0.15); color: white; border-radius: 20px; font-size: 9pt; border: 1px solid rgba(255,255,255,0.2);">${escapeHtml(s.name)}</span>`).join('')}</div></div>` : ''}
+                        ${data.experience.length > 0 ? `<div style="margin-bottom: 25px;"><div style="font-size: 11pt; font-weight: 600; color: white; margin-bottom: 15px;">Experience</div>${data.experience.map(e => `<div style="margin-bottom: 18px; padding: 15px; background: rgba(255,255,255,0.06); border-radius: 10px; border-left: 3px solid rgba(255,255,255,0.4);"><div style="font-weight: 600; color: white;">${escapeHtml(e.position)}</div><div style="font-size: 10pt; color: rgba(255,255,255,0.7); margin-top: 4px;">${escapeHtml(e.company)} • ${formatDateRange(e.startDate, e.endDate, e.current)}</div>${e.description ? `<div style="margin-top: 10px; font-size: 10pt; color: rgba(255,255,255,0.8);">${escapeHtml(e.description)}</div>` : ''}</div>`).join('')}</div>` : ''}
+                        ${data.education.length > 0 ? `<div style="margin-bottom: 25px;"><div style="font-size: 11pt; font-weight: 600; color: white; margin-bottom: 15px;">Education</div>${data.education.map(e => `<div style="margin-bottom: 12px; padding: 12px; background: rgba(255,255,255,0.06); border-radius: 8px;"><div style="font-weight: 600; color: white;">${escapeHtml(e.degree)}${e.field ? ' in ' + escapeHtml(e.field) : ''}</div><div style="font-size: 10pt; color: rgba(255,255,255,0.7);">${escapeHtml(e.institution)}</div></div>`).join('')}</div>` : ''}
+                        ${data.projects.length > 0 ? `<div><div style="font-size: 11pt; font-weight: 600; color: white; margin-bottom: 15px;">Projects</div><div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">${data.projects.map(p => `<div style="padding: 15px; background: rgba(255,255,255,0.08); border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);"><div style="font-weight: 600; color: white; font-size: 10pt;">${escapeHtml(p.name)}</div>${p.technologies ? `<div style="font-size: 9pt; color: rgba(255,255,255,0.6); margin-top: 6px;">${escapeHtml(p.technologies)}</div>` : ''}</div>`).join('')}</div></div>` : ''}
+                    </div>
+                </div>`;
+            }
         }
     };
 

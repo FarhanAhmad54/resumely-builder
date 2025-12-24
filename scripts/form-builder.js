@@ -29,12 +29,51 @@ const FormBuilder = (function () {
     }
 
     function renderPersonalForm(data) {
+        const hasPhoto = data.photo && data.photo.length > 0;
         return `
         <div class="form-section"><div class="form-section-title">Photo</div>
-            <label class="photo-upload" id="photoUpload"><input type="file" accept="image/*" id="photoInput" style="display:none">
-                <div class="photo-preview" id="photoPreview">${data.photo ? `<img src="${data.photo}" alt="Photo">` : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'}</div>
-                <div class="photo-upload-text"><h4>Upload Photo</h4><p>Click to upload or drag and drop. PNG, JPG up to 2MB</p></div>
-            </label>
+            <div class="photo-container">
+                ${hasPhoto ? `
+                    <div class="photo-preview-wrapper">
+                        <div class="photo-preview has-photo">
+                            <img src="${data.photo}" alt="Profile Photo">
+                        </div>
+                        <div class="photo-actions">
+                            <label class="btn btn-ghost btn-sm photo-change-btn">
+                                <input type="file" accept="image/*" id="photoInput" style="display:none">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+                                    <circle cx="12" cy="13" r="4"/>
+                                </svg>
+                                <span>Change</span>
+                            </label>
+                            <button class="btn btn-ghost btn-sm photo-delete-btn" id="deletePhotoBtn" type="button">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <polyline points="3 6 5 6 21 6"/>
+                                    <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                    <line x1="10" y1="11" x2="10" y2="17"/>
+                                    <line x1="14" y1="11" x2="14" y2="17"/>
+                                </svg>
+                                <span>Delete</span>
+                            </button>
+                        </div>
+                    </div>
+                ` : `
+                    <label class="photo-upload" id="photoUpload">
+                        <input type="file" accept="image/*" id="photoInput" style="display:none">
+                        <div class="photo-preview">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+                                <circle cx="12" cy="13" r="4"/>
+                            </svg>
+                        </div>
+                        <div class="photo-upload-text">
+                            <h4>Upload Photo</h4>
+                            <p>Click to upload. PNG, JPG up to 2MB</p>
+                        </div>
+                    </label>
+                `}
+            </div>
         </div>
         <div class="form-section"><div class="form-section-title">Basic Info</div>
             <div class="form-row"><div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" data-field="firstName" value="${escapeAttr(data.firstName)}" placeholder="John"></div><div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" data-field="lastName" value="${escapeAttr(data.lastName)}" placeholder="Doe"></div></div>
@@ -179,7 +218,7 @@ const FormBuilder = (function () {
         if (!container) return;
 
         // Input changes
-        container.querySelectorAll('.form-input, .form-textarea, .form-select').forEach(input => {
+        container.querySelectorAll('.form-input, .form-textarea, .form-select, .skill-input').forEach(input => {
             input.addEventListener('input', handleInputChange);
             input.addEventListener('change', handleInputChange);
         });
@@ -199,6 +238,12 @@ const FormBuilder = (function () {
         // Photo upload
         const photoInput = document.getElementById('photoInput');
         if (photoInput) photoInput.addEventListener('change', handlePhotoUpload);
+
+        // Photo delete button
+        const deletePhotoBtn = document.getElementById('deletePhotoBtn');
+        if (deletePhotoBtn) {
+            deletePhotoBtn.addEventListener('click', handlePhotoDelete);
+        }
     }
 
     function handleInputChange(e) {
@@ -256,15 +301,35 @@ const FormBuilder = (function () {
     function handlePhotoUpload(e) {
         const file = e.target.files[0];
         if (!file) return;
-        if (file.size > 2 * 1024 * 1024) { alert('Photo must be less than 2MB'); return; }
+        if (file.size > 2 * 1024 * 1024) {
+            alert('Photo must be less than 2MB');
+            return;
+        }
         const reader = new FileReader();
         reader.onload = (ev) => {
             ResumeData.updateField('personal', 'photo', ev.target.result);
-            const preview = document.getElementById('photoPreview');
-            if (preview) preview.innerHTML = `<img src="${ev.target.result}" alt="Photo">`;
+            // Re-render the form to show the photo with change/delete buttons
+            renderForm(currentSection);
             if (onUpdateCallback) onUpdateCallback();
+            // Show success toast
+            if (typeof Export !== 'undefined' && Export.showToast) {
+                Export.showToast('📷 Photo uploaded successfully!');
+            }
         };
         reader.readAsDataURL(file);
+    }
+
+    function handlePhotoDelete(e) {
+        e.preventDefault();
+        if (confirm('Are you sure you want to delete your photo?')) {
+            ResumeData.updateField('personal', 'photo', '');
+            renderForm(currentSection);
+            if (onUpdateCallback) onUpdateCallback();
+            // Show toast
+            if (typeof Export !== 'undefined' && Export.showToast) {
+                Export.showToast('🗑️ Photo deleted');
+            }
+        }
     }
 
     return { init, setSection, renderForm, getCurrentSection: () => currentSection };

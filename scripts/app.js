@@ -3,6 +3,9 @@
  */
 const App = (function () {
     function init() {
+        // Initialize theme first to prevent flash
+        initTheme();
+
         // Initialize modules
         ResumeData.init({
             onChange: handleDataChange,
@@ -18,13 +21,54 @@ const App = (function () {
         setupHeaderButtons();
         setupModals();
         setupKeyboardShortcuts();
+        setupThemeToggle();
 
         // Initial render
         FormBuilder.setSection('personal');
         Preview.render();
         Preview.updateATSScore();
 
+        // Add page load animation
+        document.body.classList.add('fade-in');
+
         console.log('Resumely initialized successfully!');
+    }
+
+    // Theme Management
+    function initTheme() {
+        const savedTheme = localStorage.getItem('resumely_theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        } else if (prefersDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('resumely_theme')) {
+                document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            }
+        });
+    }
+
+    function setupThemeToggle() {
+        const themeToggle = document.getElementById('themeToggle');
+        if (!themeToggle) return;
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('resumely_theme', newTheme);
+
+            // Show toast notification
+            if (typeof Export !== 'undefined' && Export.showToast) {
+                Export.showToast(`${newTheme === 'dark' ? '🌙 Dark' : '☀️ Light'} mode activated`);
+            }
+        });
     }
 
     function handleDataChange(data) {
