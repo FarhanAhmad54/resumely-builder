@@ -43,7 +43,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&family=Lato:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&family=Lato:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&family=Nunito:wght@300;400;600;700&family=Quicksand:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600;700&family=Josefin+Sans:wght@300;400;500;600;700&family=Oswald:wght@300;400;500;600;700&family=PT+Serif:wght@400;700&family=Crimson+Text:wght@400;600;700&family=Libre+Baskerville:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap"
         rel="stylesheet">
 
     <!-- Styles -->
@@ -425,20 +425,51 @@
                     <div class="color-picker-row">
                         <input type="color" id="accentColor" value="#10B981" class="color-picker">
                         <div class="preset-colors">
-                            <button class="preset-color" data-color="#10B981" style="background: #10B981"></button>
-                            <button class="preset-color" data-color="#3B82F6" style="background: #3B82F6"></button>
-                            <button class="preset-color" data-color="#8B5CF6" style="background: #8B5CF6"></button>
-                            <button class="preset-color" data-color="#EF4444" style="background: #EF4444"></button>
-                            <button class="preset-color" data-color="#F59E0B" style="background: #F59E0B"></button>
-                            <button class="preset-color" data-color="#EC4899" style="background: #EC4899"></button>
-                            <button class="preset-color" data-color="#14B8A6" style="background: #14B8A6"></button>
-                            <button class="preset-color" data-color="#64748B" style="background: #64748B"></button>
+                            <!-- Original 8 colors -->
+                            <button class="preset-color" data-color="#10B981" style="background: #10B981"
+                                title="Emerald"></button>
+                            <button class="preset-color" data-color="#3B82F6" style="background: #3B82F6"
+                                title="Blue"></button>
+                            <button class="preset-color" data-color="#8B5CF6" style="background: #8B5CF6"
+                                title="Violet"></button>
+                            <button class="preset-color" data-color="#EF4444" style="background: #EF4444"
+                                title="Red"></button>
+                            <button class="preset-color" data-color="#F59E0B" style="background: #F59E0B"
+                                title="Amber"></button>
+                            <button class="preset-color" data-color="#EC4899" style="background: #EC4899"
+                                title="Pink"></button>
+                            <button class="preset-color" data-color="#14B8A6" style="background: #14B8A6"
+                                title="Teal"></button>
+                            <button class="preset-color" data-color="#64748B" style="background: #64748B"
+                                title="Slate"></button>
+                            <!-- 10 NEW colors -->
+                            <button class="preset-color" data-color="#6366F1" style="background: #6366F1"
+                                title="Indigo"></button>
+                            <button class="preset-color" data-color="#06B6D4" style="background: #06B6D4"
+                                title="Cyan"></button>
+                            <button class="preset-color" data-color="#84CC16" style="background: #84CC16"
+                                title="Lime"></button>
+                            <button class="preset-color" data-color="#22C55E" style="background: #22C55E"
+                                title="Green"></button>
+                            <button class="preset-color" data-color="#F97316" style="background: #F97316"
+                                title="Orange"></button>
+                            <button class="preset-color" data-color="#E11D48" style="background: #E11D48"
+                                title="Rose"></button>
+                            <button class="preset-color" data-color="#7C3AED" style="background: #7C3AED"
+                                title="Purple"></button>
+                            <button class="preset-color" data-color="#0EA5E9" style="background: #0EA5E9"
+                                title="Sky"></button>
+                            <button class="preset-color" data-color="#DC2626" style="background: #DC2626"
+                                title="Crimson"></button>
+                            <button class="preset-color" data-color="#1E293B" style="background: #1E293B"
+                                title="Dark Navy"></button>
                         </div>
                     </div>
                 </div>
                 <div class="customize-section">
                     <h4>Font Style</h4>
-                    <div class="font-options" style="max-height: 300px; overflow-y: auto;">
+                    <div class="font-options" style="max-height: 350px; overflow-y: auto;">
+                        <!-- Original 10 fonts -->
                         <label class="font-option">
                             <input type="radio" name="fontStyle" value="professional" checked>
                             <span class="font-option-label" style="font-family: 'Merriweather', serif">Merriweather
@@ -488,6 +519,57 @@
                             <input type="radio" name="fontStyle" value="sourcesans">
                             <span class="font-option-label" style="font-family: 'Source Sans 3', sans-serif">Source Sans
                                 (Technical)</span>
+                        </label>
+                        <!-- 10 NEW fonts -->
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="nunito">
+                            <span class="font-option-label" style="font-family: 'Nunito', sans-serif">Nunito (Rounded &
+                                Friendly)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="quicksand">
+                            <span class="font-option-label" style="font-family: 'Quicksand', sans-serif">Quicksand
+                                (Light & Airy)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="rubik">
+                            <span class="font-option-label" style="font-family: 'Rubik', sans-serif">Rubik (Slightly
+                                Rounded)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="worksans">
+                            <span class="font-option-label" style="font-family: 'Work Sans', sans-serif">Work Sans
+                                (Professional)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="josefin">
+                            <span class="font-option-label" style="font-family: 'Josefin Sans', sans-serif">Josefin Sans
+                                (Stylish)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="oswald">
+                            <span class="font-option-label" style="font-family: 'Oswald', sans-serif">Oswald (Condensed
+                                Bold)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="ptserif">
+                            <span class="font-option-label" style="font-family: 'PT Serif', serif">PT Serif
+                                (Classic)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="crimson">
+                            <span class="font-option-label" style="font-family: 'Crimson Text', serif">Crimson Text
+                                (Editorial)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="librebaskerville">
+                            <span class="font-option-label" style="font-family: 'Libre Baskerville', serif">Libre
+                                Baskerville (Traditional)</span>
+                        </label>
+                        <label class="font-option">
+                            <input type="radio" name="fontStyle" value="dmsans">
+                            <span class="font-option-label" style="font-family: 'DM Sans', sans-serif">DM Sans
+                                (Low-contrast)</span>
                         </label>
                     </div>
                 </div>

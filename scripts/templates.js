@@ -379,7 +379,18 @@ const Templates = (function () {
             playfair: "'Playfair Display', serif",
             montserrat: "'Montserrat', sans-serif",
             raleway: "'Raleway', sans-serif",
-            sourcesans: "'Source Sans 3', sans-serif"
+            sourcesans: "'Source Sans 3', sans-serif",
+            // 10 NEW fonts
+            nunito: "'Nunito', sans-serif",
+            quicksand: "'Quicksand', sans-serif",
+            rubik: "'Rubik', sans-serif",
+            worksans: "'Work Sans', sans-serif",
+            josefin: "'Josefin Sans', sans-serif",
+            oswald: "'Oswald', sans-serif",
+            ptserif: "'PT Serif', serif",
+            crimson: "'Crimson Text', serif",
+            librebaskerville: "'Libre Baskerville', serif",
+            dmsans: "'DM Sans', sans-serif"
         };
         return fonts[style] || fonts.professional;
     }
